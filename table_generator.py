@@ -5,12 +5,12 @@ w_data = ret_world_cases()
 data = ret_json(country='india', date=time.strftime('%Y-%m-%d', time.gmtime()))
 
 def format_data(t):
-	str_formatted = "<table border='1'> <tr> <th> Date </th> <th> Count </th> </tr>"
+	str_formatted = '<table class="pure-table pure-table-horizontal" border="1"> <thead> <tr> <th> Date </th> <th> Count </th> </tr> </thead> <tbody>'
 	
 	for d in data['stat_by_country']:
 		str_formatted += "<tr> <td> {} </td> <td> {} </td> </tr>".format(d['record_date'], d[t])
 	
-	str_formatted += "</table>"
+	str_formatted += "</tbody> </table>"
 
 	return str_formatted
 
@@ -39,7 +39,7 @@ def case_perm_html():
 	return format_data('total_cases_per1m')
 
 def ret_world_data_html():
-	return '<table border="1"> <tr> <th>Total Cases</th> <th>Total Death</th> <th>Total Recovered</th> <th>New Cases</th> <th>New Deaths</th> <th>Statistics Updated At</th> </tr> <tr> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> </tr> </table> </br>'.format(w_data['total_cases'], w_data['total_deaths'], w_data['total_recovered'], w_data['new_cases'], w_data['new_deaths'], w_data['statistic_taken_at'])
+	return '<table class="pure-table pure-table-horizontal" border="1"> <thead> <tr> <th>Total Cases</th> <th>Total Death</th> <th>Total Recovered</th> <th>New Cases</th> <th>New Deaths</th> <th>Statistics Updated At</th> </tr> </thead> <tbody> <tr> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> <td>{}</td> </tr> </tbody> </table> </br>'.format(w_data['total_cases'], w_data['total_deaths'], w_data['total_recovered'], w_data['new_cases'], w_data['new_deaths'], w_data['statistic_taken_at'])
 
 def refresh_data():
 	global w_data

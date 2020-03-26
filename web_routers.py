@@ -13,31 +13,66 @@ serious_var = table_generator.serious_html()
 cases_perm_var = table_generator.case_perm_html()
 world_data_var = table_generator.ret_world_data_html()
 
-@app.route('/')
-def index_page():
+def format_html(title, html_table):
 	return '''
 		<html>
 		<head>
+			<title> {} - COVID-19 </title>
+			<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+		</head>
+		<body>
+			<div class="pure-g">
+				<header class="pure-u-1">
+					{} in India<br><br>
+				</header>
+				
+				<div class="pure-u-1">
+					{}
+				</div>
+
+				<div class="pure-u-1">
+					<footer>
+						Made with hearts& to see this page disapper soon!
+					</footer>
+				</div>
+			</div>
+		</body>
+		</html>
+	'''.format(title, title, html_table)
+
+
+@app.route('/')
+def index_page():
+	return '''
+		<!DOCTYPE html>
+		<head>
 			<title> COVID stats </title>
+			<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
 		</head>
 		<body>
 			<header>
 				Get COVID-19 updates for India<br><br>
 			</header>
 			
-			Get info on <a href="/total_cases">Total Cases</a><br>
-			Get info on <a href="/new_cases">New Cases</a><br>
-			Get info on <a href="/active_cases">Active Cases</a><br>
-			Get info on <a href="/total_deaths">Total Deaths</a><br>
-			Get info on <a href="/new_deaths">New Deaths</a><br>
-			Get info on <a href="/total_recovered">Total Recovered</a><br>
-			Get info on <a href="/serious">Serious</a><br>
-			Get info on <a href="/case_perm">Total Cases/million</a><br><br>
-			
-			{}
+			<div class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+				<ul class="pure-menu-list">
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/total_cases">Total Cases</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/new_cases">New Cases</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/active_cases">Active Cases</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/total_deaths">Total Deaths</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/new_deaths">New Deaths</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/total_recovered">Total Recovered</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/serious">Serious</a><br> </li>
+					<li class="pure-menu-item"> <a class="pure-menu-link" href="/case_perm">Cases per million</a><br><br> </li>
+				</ul>
+			</div>
+				
+				<div class="pure-u-1">
+					{}
+				</div>
 
 			<footer>
-				Made with <3 to see this page disapper soon!
+				Made with &hearts; to see this page disapper soon!
 			</footer>
 		</body>
 		</html>
@@ -45,172 +80,35 @@ def index_page():
 
 @app.route('/total_cases')
 def total_cases():
-	return '''
-		<html>
-		<head>
-			<title> Total Cases - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				Total cases in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(total_cases_var)
-
+	return format_html('Total Cases', total_cases_var)
 
 @app.route('/new_cases')
 def new_cases():
-	return '''
-		<html>
-		<head>
-			<title> New Cases - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				New cases in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(new_cases_var)
+	return format_html('New Cases', new_cases_var)
 
 @app.route('/active_cases')
 def active_cases():
-	return '''
-		<html>
-		<head>
-			<title> Active Cases - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				Active cases in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(active_cases_var)
+	return format_html('Active Cases', active_cases_var)
 
 @app.route('/total_deaths')
 def total_deaths():
-	return '''
-		<html>
-		<head>
-			<title> Total Deaths - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				 Total Deaths in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(total_deaths_var)
+	return format_html('Total Death Cases', total_deaths_var)
 
 @app.route('/new_deaths')
 def new_deaths():
-	return '''
-		<html>
-		<head>
-			<title> New Deaths - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				 New Deaths in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(new_deaths_var)
+	return format_html('New Death Cases', new_deaths_var)
 
 @app.route('/total_recovered')
 def total_recovered():
-	return '''
-		<html>
-		<head>
-			<title> Total Recovered - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				 Total Recovered in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(total_recovery_var)
+	return format_html('Total Recovered Cases', total_recovery_var)
 
 @app.route('/serious')
 def serious():
-	return '''
-		<html>
-		<head>
-			<title> Serious Persons - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				 Serious Persons in India<br><br>
-			</header>
-			
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(serious_var)
+	return format_html('Serious Cases', serious_var)
 
 @app.route('/case_perm')
 def case_perm():
-	return '''
-		<html>
-		<head>
-			<title> Cases/Million - COVID-19 </title>
-		</head>
-		<body>
-			<header>
-				 Cases/Million in India<br><br>
-			</header>
-		
-			{}
-
-			<footer>
-				Made with <3 to see this page disapper soon!
-			</footer>
-		</body>
-		</html>
-	'''.format(cases_perm_var)
+	return format_html('Cases/Million', cases_perm_var)
 
 @app.route('/refresh')
 def refresh_data():
