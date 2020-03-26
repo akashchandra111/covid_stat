@@ -29,13 +29,10 @@ def format_html(title, html_table):
 				<div class="pure-u-1">
 					{}
 				</div>
-
-				<div class="pure-u-1">
-					<footer>
-						Made with hearts& to see this page disapper soon!
-					</footer>
-				</div>
 			</div>
+			<footer>
+				Made with &hearts; to see this page disapper soon!
+			</footer>
 		</body>
 		</html>
 	'''.format(title, title, html_table)
